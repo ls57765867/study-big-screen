@@ -1,13 +1,13 @@
 <!--利用两个矩形，一个为底色矩形，另一个矩形使用白色蒙版只展示出一小部分，并用动画标签让其运动，最后使用渐变色将第二个矩形变色-->
 
 <template>
-  <div class="bg-gray-700">
-    <svg viewBox="0 0 400 400" width="400" height="400">
+  <div ref="svgBox" class="fly-box bg-gray-700">
+    <svg ref="svg" :width="width" :height="height">
       <defs>
         <!--一个矩形组件-->
         <path
           id="fly-box-path"
-          d="M5 5 L5 395 L395 395 L395 5 Z"
+          :d="pathD"
           fill="none"
         ></path>
         <!--渐变色-->
@@ -28,7 +28,7 @@
         <mask id="fly-box-mask">
           <circle r="150" cx="0" cy="0" fill="url(#radial-gradient)">
             <!--动画效果-->
-            <animateMotion dur="3s" path="M5 5 L395 5 L395 395 L5 395 Z" rotate="auto"
+            <animateMotion dur="3s" :path="animateD" rotate="auto"
                            repeatCount="indefinite"></animateMotion>
           </circle>
         </mask>
@@ -38,5 +38,45 @@
       <!--运动的边框-->
       <use href="#fly-box-path" stroke-width="3" stroke="#4fd2dd" mask="url(#fly-box-mask)"></use>
     </svg>
+    <div class="fly-box-container">
+      <slot></slot>
+    </div>
   </div>
 </template>
+
+<script lang="ts" setup>
+const svgBox = ref<SVGElement>()
+const width = ref(0)
+const height = ref(0)
+nextTick(()=>{
+  width.value = svgBox.value!.clientWidth
+  height.value = svgBox.value!.clientHeight
+})
+const pathD = computed(()=> `M5 5 L5 ${height.value - 5} L${width.value -5 } ${height.value - 5} L${width.value - 5} 5 Z`)
+const animateD = computed(()=> `M5 5 L${width.value - 5} 5 L${width.value - 5} ${height.value -5 } L5 ${height.value - 5} Z`)
+</script>
+
+
+<style scoped>
+.fly-box{
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+.fly-box svg {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.fly-box-container{
+  width: 100%;
+  height: 100%;
+  padding: 10px;
+}
+</style>
+
+
+

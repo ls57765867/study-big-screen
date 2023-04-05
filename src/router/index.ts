@@ -30,6 +30,11 @@ export const menuConfig: MenuInterface[] = [
         path: 'svgFlexbox',
         component: '../components/svg-animation-3.vue',
         index: '/svg/svgFlexbox'
+      },{
+        name: 'svg绘制轨迹组件',
+        path: 'svgFlexboxCom',
+        component: '../view/fly-box.vue',
+        index: '/svg/svgFlexboxCom'
       },
     ]
   }

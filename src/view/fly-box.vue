@@ -1,13 +1,19 @@
 <template>
   <div>
 
+    <div class="w-32">
+      <svg-animation3>
+        <div>123</div>
+        <div>123</div>
+        <div>123</div>
+        <div>123</div>
+      </svg-animation3>
+    </div>
   </div>
 </template>
 
 <script>
-export default {
-  name: "fly-box"
-}
+
 </script>
 
 <style scoped>

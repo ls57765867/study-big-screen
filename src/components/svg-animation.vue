@@ -2,19 +2,20 @@
   <div>
     <svg :width="width" :height="width">
       <circle
-        :cx="width / 2"
-        :cy="width / 2"
-        :r="(width / 2) * 0.95"
+        :cx="props.width / 2"
+        :cy="props.width / 2"
+        :r="(props.width / 2) * 0.95"
         :stroke-width="border"
         stroke="#ccc"
         fill="none"
       ></circle>
       <circle
         class="circle"
-        :cx="width / 2"
-        :cy="width / 2"
-        :r="(width / 2) * 0.95"
+        :cx="props.width / 2"
+        :cy="props.width / 2"
+        :r="(props.width / 2) * 0.95"
         :stroke-width="border"
+        stroke-linecap="round"
         stroke="red"
         fill="none"
       ></circle>
@@ -27,9 +28,9 @@ import { ComputedRef } from 'vue'
 
 const props = withDefaults(
   defineProps<{
-    width: number
-    border: number
-    timer: string
+    width?: number
+    border?: number
+    timer?: string
   }>(),
   {
     width: 400,
@@ -38,7 +39,6 @@ const props = withDefaults(
   }
 )
 
-const { width, timer } = toRefs(props)
 const maxLength: ComputedRef<number> = computed(() => props.width * Math.PI)
 </script>
 

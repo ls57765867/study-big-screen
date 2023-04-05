@@ -4,7 +4,8 @@ export interface MenuInterface {
   path: string
   component?: string
   index?: string
-  children?: MenuInterface[]
+  children?: MenuInterface[],
+  props?:any
 }
 export const menuConfig: MenuInterface[] = [
   {
@@ -13,21 +14,32 @@ export const menuConfig: MenuInterface[] = [
     index: 'svg',
     children: [
       {
-        name: 'bb',
-        path: 'bb',
+        name: 'loading图',
+        path: 'loading',
         component: '../components/svg-animation.vue',
-        index: 'svg/bb'
-      }
+        index: '/svg/loading'
+      },
+      {
+        name: 'autoLogo',
+        path: 'autoLogo',
+        component: '../components/svg-animation-2.vue',
+        index: '/svg/autoLogo'
+      },
+      {
+        name: 'svg绘制轨迹',
+        path: 'svgFlexbox',
+        component: '../components/svg-animation-3.vue',
+        index: '/svg/svgFlexbox'
+      },
     ]
   }
 ]
 
 const formatRoutes = (menuConfig: MenuInterface[]): any => {
-  return menuConfig.map(item => ({
-    path: item.path,
+  return menuConfig.map(item => (Object.assign({},item,{
     component: item.component ? eval('() => import(item.component)') : null,
     children: item.children ? formatRoutes(item.children) : null
-  }))
+  })))
 }
 const routes: RouteRecordRaw[] = [
   {

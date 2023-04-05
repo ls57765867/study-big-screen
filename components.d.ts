@@ -28,6 +28,7 @@ declare module '@vue/runtime-core' {
     RouterView: typeof import('vue-router')['RouterView']
     SvgAnimation: typeof import('./src/components/svg-animation.vue')['default']
     SvgAnimation2: typeof import('./src/components/svg-animation-2.vue')['default']
+    SvgAnimation3: typeof import('./src/components/svg-animation-3.vue')['default']
     SvgIconfont: typeof import('./src/components/svg-iconfont.vue')['default']
     SvgIconfront: typeof import('./src/components/svg-iconfront.vue')['default']
     TsxMenu: typeof import('./src/components/tsx-menu.vue')['default']
